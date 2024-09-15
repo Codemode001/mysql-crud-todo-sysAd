@@ -1,5 +1,5 @@
-import Signup from "@/components/Signup";
+import Login from "@/components/Signin";
 
 export default function Home() {
-  return <Signup />;
+  return <Login />;
 }
