@@ -15,7 +15,7 @@ export default async function handler(req: any, res: any) {
 
       const user = (rows as any[])[0];
 
-      res.status(200).json({ message: "Login successful" });
+      res.status(200).json({ message: "Login successful", user });
     } catch (error) {
       res.status(500).json({ message: "Database error" });
     }

@@ -25,7 +25,9 @@ export default function Signup() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-bold text-center mb-6">Signup</h1>
+        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          Signup
+        </h1>
         <form onSubmit={handleSignup}>
           <div className="mb-4">
             <label
@@ -40,7 +42,7 @@ export default function Signup() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-6">
@@ -56,7 +58,7 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <button

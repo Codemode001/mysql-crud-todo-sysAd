@@ -7,6 +7,7 @@ export default function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [userName, setUserName] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: any) => {
@@ -19,8 +20,9 @@ export default function Signin() {
       });
 
       setMessage(response.data.message);
+      setUserName(response.data.user.username);
       if (response.data.message === "Login successful") {
-        router.push("/home");
+        router.push(`/home?username=${response.data.user.username}`); //dili mo gana ang pag pass og data using query objects here sa next.js atay bantug e construct nalang manually pangit kayo
       }
     } catch (error) {
       setMessage("Error occurred during login.");
@@ -82,7 +84,7 @@ export default function Signin() {
         )}
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account yet?{" "}
-          <a href="/signup" className="text-blue-500 hover:underline">
+          <a href="/Signup" className="text-blue-500 hover:underline">
             Signup here
           </a>
         </p>
