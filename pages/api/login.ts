@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
-    const { username, password } = req.body;
+    const { username } = req.body;
 
     try {
       const [rows] = await db.query("SELECT * FROM users WHERE username = ?", [
