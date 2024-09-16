@@ -9,7 +9,6 @@ const Home = () => {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("medium");
   const [message, setMessage] = useState("");
-  const [users, setUsers] = useState<any>();
   const { userId } = router.query;
   const [userName, setUserName] = useState("");
   const userIdInt =
@@ -22,6 +21,7 @@ const Home = () => {
         task,
         due_date: dueDate,
         priority,
+        userIdInt,
       });
       setMessage(response.data.message);
       setTask("");
@@ -29,6 +29,9 @@ const Home = () => {
       setPriority("medium");
       const updatedTodos = await axios.get("/api/todos");
       setTodos(updatedTodos.data);
+      if (userIdInt) {
+        fetchTodos(userIdInt);
+      }
     } catch (error) {
       setMessage("Error occurred while adding the todo.");
     }
@@ -44,22 +47,21 @@ const Home = () => {
     }
   };
 
-  const fetchTodos = async () => {
+  const fetchTodos = async (userId: number) => {
     try {
-      const response = await axios.get("/api/todos");
+      const response = await axios.get(`/api/todos?id=${userId}`);
       setTodos(response.data);
     } catch (error) {
       console.error("Error fetching todos", error);
     }
   };
 
-  const fetchUsers = async (userId: any) => {
+  const fetchUsers = async (userId: number) => {
     try {
       const response = await axios.get(`/api/users?id=${userId}`);
       const userData = response.data.data;
 
       if (userData.length > 0) {
-        setUsers(userData);
         setUserName(userData[0].username);
       }
     } catch (error) {
@@ -68,9 +70,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchTodos();
     if (userIdInt) {
       fetchUsers(userIdInt);
+      fetchTodos(userIdInt);
     }
   }, [userIdInt]);
 
