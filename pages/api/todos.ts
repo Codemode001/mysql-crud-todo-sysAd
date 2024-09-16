@@ -25,4 +25,23 @@ export default async function handler(req: any, res: any) {
       res.status(500).json({ message: "Database error" });
     }
   }
+
+  if (req.method === "PUT") {
+    const { status, id } = req.body;
+    try {
+      await db.query("UPDATE todos SET status = ? WHERE id = ?", [status, id]);
+      res.status(200).json({ message: "Todo updated successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Database error" });
+    }
+  }
+
+  if (req.method === "DELETE") {
+    try {
+      await db.query("DELETE FROM todos WHERE id = ?", [id]);
+      res.status(200).json({ message: "Todo deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Database error" });
+    }
+  }
 }
